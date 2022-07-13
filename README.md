@@ -9,7 +9,7 @@ Quartz.Net 实现Job 简化启动实现，支持自定义执行策略，简化Jo
 
 ## 安装
 ```
-Install-Package Reduce.Quartz.Hosting -Version 1.0.0
+Install-Package Reduce.Quartz.Hosting -Version 1.0.1
 ```
 
 ## 使用说明
