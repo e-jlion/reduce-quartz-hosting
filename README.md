@@ -22,11 +22,14 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 ## 使用说明
-### 目前提供的特性说明
-  - [CronScheduleStrategyAttribute] 以当前默认时间的Cron表达式做为Job的执行策略
-  - [UtcTimeCronScheduleAttribute]  以UTC 时间的Cron 表达式做为Job的执行策略
+### 目前提供的内置执行策略特性
+  - [`CronScheduleStrategyAttribute`] 以当前默认时间的Cron表达式做为Job的执行策略
+  - [`UtcTimeCronScheduleAttribute`]  以UTC 时间的Cron 表达式做为Job的执行策略
 
 ### Job 实现
+
+- 使用内置常用的 CronScheduleStrategyAttribute 特性去执行Job
+
 ```
     [DisallowConcurrentExecution]
     [CronScheduleStrategyAttribute(CronExpress = "* * * * * ? *", Description = "HelloV1", Name = "HelloV1")]
@@ -51,7 +54,7 @@ public void ConfigureServices(IServiceCollection services)
         }
     }
 ```
-### 自定义Job执行策略特性
+### 自定义执行策略特性
 
 - 实现 IScheduleStrategyAttribute 策略特性
 
@@ -110,7 +113,8 @@ public void ConfigureServices(IServiceCollection services)
 
     }
 ```
-- 自定义执行策略 Job 实现代码
+
+- 自定义执行策略 Job 实现代码,标注`CustomerScheduleStrategyAttribute` 即可
 
 ```
     [DisallowConcurrentExecution]
