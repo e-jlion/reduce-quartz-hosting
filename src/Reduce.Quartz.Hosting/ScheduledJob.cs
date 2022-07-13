@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Quartz.Reduce.Hosting
+namespace Reduce.Quartz.Hosting
 {
     public class ScheduledJob
     {

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Quartz;
 using Quartz.Spi;
 
-namespace Quartz.Reduce.Hosting
+namespace Reduce.Quartz.Hosting
 {
     internal class ScheduledHostedService : IHostedService
     {

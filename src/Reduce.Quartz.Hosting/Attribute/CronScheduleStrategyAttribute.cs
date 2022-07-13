@@ -5,13 +5,13 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Quartz.Reduce.Hosting
+namespace Reduce.Quartz.Hosting
 {
     /// <summary>
-    /// 以 Utc 时间的 Cron表达式 执行规则策略特性 WithCronSchedule(Cron, cronItem => cronItem.InTimeZone(TimeZoneInfo.Utc))//(GTM+2)
+    /// 以 服务器当前时间的 Cron表达式 执行规则策略特性 (WithCronSchedule(Cron))
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public class UtcTimeCronScheduleAttribute : Attribute, IScheduleStrategyAttribute
+    public class CronScheduleStrategyAttribute : Attribute, IScheduleStrategyAttribute
     {
         /// <summary>
         /// Cron 执行表达式
@@ -19,7 +19,7 @@ namespace Quartz.Reduce.Hosting
         public string CronExpress { set; get; }
 
         /// <summary>
-        /// 执行Job的名称（默认Job实例的FullName）
+        /// 执行Job的名称 （默认Job实例的FullName）
         /// </summary>
         public string Name { set; get; }
 
@@ -28,8 +28,10 @@ namespace Quartz.Reduce.Hosting
         /// </summary>
         public string Description { set; get; }
 
+
         public IJobDetail CreateJob(ScheduledJob schedule)
         {
+
             var jobName = string.IsNullOrEmpty(Name) ? schedule.Type.FullName : Name;
             var groupName = jobName + "_group";
 
@@ -52,10 +54,11 @@ namespace Quartz.Reduce.Hosting
             return TriggerBuilder
                     .Create()
                     .WithIdentity(triggerName, triggerGroupName)
-                    .WithCronSchedule(CronExpress, cronItem => cronItem.InTimeZone(TimeZoneInfo.Utc))//(GTM+2)
+                    .WithCronSchedule(CronExpress)
                     .WithDescription(Description ?? schedule.Type.FullName)
                     .StartNow()
                     .Build();
         }
+
     }
 }

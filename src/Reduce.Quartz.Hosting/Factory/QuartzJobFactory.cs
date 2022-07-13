@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using Quartz.Spi;
 
-namespace Quartz.Reduce.Hosting
+namespace Reduce.Quartz.Hosting
 {
     internal class QuartzJobFactory : IJobFactory
     {

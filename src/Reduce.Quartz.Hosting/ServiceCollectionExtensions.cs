@@ -9,8 +9,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Quartz.Reduce.Hosting.Extensions;
-using Quartz.Reduce.Hosting;
+using Reduce.Quartz.Hosting.Extensions;
+using Reduce.Quartz.Hosting;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quartz.Reduce.Hosting.Extensions
+namespace Reduce.Quartz.Hosting.Extensions
 {
     internal static class AssemblyExtensions
     {

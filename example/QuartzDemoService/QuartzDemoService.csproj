@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Quartz.Reduce.Hosting\Quartz.Reduce.Hosting.csproj" />
+    <ProjectReference Include="..\..\src\Reduce.Quartz.Hosting\Reduce.Quartz.Hosting.csproj" />
   </ItemGroup>
-
 </Project>

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Quartz.Reduce.Hosting
+namespace Reduce.Quartz.Hosting
 {
     /// <summary>
     /// Job 执行Schedule 策略 特效接口,可以继承该策略接口实现自己的创建IJobDetail 和Trigger 的方法，会自动注入和启动Job
