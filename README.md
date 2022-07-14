@@ -1,5 +1,6 @@
 # reduce-quartz-hosting 简介
-Quartz.Net Job 简化启动 ，支持自定义执行策略；通过一次注入启动所有实现的IJob ，并通过标注特性做为Job执行策略，同时可以自定义实现特性策略，可扩展性强，提高开发定时作业的效率
+Quartz.Net Job 简化启动 ，支持自定义执行策略；通过一次注入启动所有实现的IJob ，并通过标注特性做为Job执行策略，同时可以自定义实现特性策略，可扩展性强，提高开发定时作业的效率。
+Reduce-quartz-hosting  对 Quartz.net 组件 Job 的管理跟家方便，很少的代码植入，即可管理启动Job
 - 目前版本：1.0.1
 
 
