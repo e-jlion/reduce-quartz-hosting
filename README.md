@@ -25,6 +25,7 @@ public void ConfigureServices(IServiceCollection services)
 ### 目前提供的内置执行策略特性
   - [`CronScheduleStrategyAttribute`] 以当前默认时间的Cron表达式做为Job的执行策略
   - [`UtcTimeCronScheduleAttribute`]  以UTC 时间的Cron 表达式做为Job的执行策略
+  - [`支持自定义执行策略的实现`] 可以调用方自己实现`IScheduleStrategyAttribute` Job 执行定时执行策略的实现，比较灵活，扩展性强
 
 ### Job 实现
 
