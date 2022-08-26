@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services"></param>
         /// <param name="assembly"></param>
-        public static void AddHostedStragegyJob(this IServiceCollection services, Assembly assembly)
+        /// <summary>
+        public static void AddHostStragegyJob(this IServiceCollection services, Assembly assembly, Action<QuartzHostingOptions> configAction = null)
         {
             TryAddScheduledHostedService(services);
 
@@ -35,8 +36,14 @@ namespace Microsoft.Extensions.DependencyInjection
                 services.Add(new ServiceDescriptor(type, type, ServiceLifetime.Singleton));
                 services.AddSingleton(new ScheduledJob(type, attribute));
             }
-        }
 
+            if (configAction != null)
+            {
+                //添加配置
+                services.Configure<QuartzHostingOptions>(configAction);
+            }
+
+        }
         private static void TryAddScheduledHostedService(this IServiceCollection services)
         {
             services.TryAddSingleton<IJobFactory, QuartzJobFactory>();

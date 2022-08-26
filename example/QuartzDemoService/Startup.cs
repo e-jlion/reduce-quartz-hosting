@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Specialized;
 
 namespace QuartzDemoService
 {
@@ -13,7 +14,17 @@ namespace QuartzDemoService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(new Test2() { Name = "2342" });
-            services.AddHostedStragegyJob(typeof(Startup).Assembly);
+            //services.AddHostStragegyJob(typeof(Startup).Assembly);
+
+
+            //支持配置
+            services.AddHostStragegyJob(typeof(Startup).Assembly, config =>
+            {
+                config.NameValueCollection = new NameValueCollection
+                {
+                    {"quartz.threadPool.threadCount","2" }
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

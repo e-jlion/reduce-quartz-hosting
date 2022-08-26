@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Quartz;
+using Quartz.Impl;
 using Quartz.Spi;
 
 namespace Reduce.Quartz.Hosting
@@ -13,17 +16,17 @@ namespace Reduce.Quartz.Hosting
         private readonly ISchedulerFactory _schedulerFactory;
         private readonly IEnumerable<ScheduledJob> _jobSchedules;
         private readonly IJobFactory _jobFactory;
-
-
-
+        
         public ScheduledHostedService(
-            ISchedulerFactory schedulerFactory,
             IJobFactory jobFactory,
+            IOptions<QuartzHostingOptions> options,
             IEnumerable<ScheduledJob> jobSchedules)
         {
-            _schedulerFactory = schedulerFactory;
             _jobSchedules = jobSchedules;
             _jobFactory = jobFactory;
+
+            var props = options?.Value?.NameValueCollection ?? new NameValueCollection();
+            _schedulerFactory = new StdSchedulerFactory(props);
         }
 
         private IScheduler Scheduler { get; set; }
