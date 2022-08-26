@@ -1,6 +1,7 @@
 # reduce-quartz-hosting 简介
-Quartz.Net Job 简化启动 ，支持自定义执行策略；通过一次注入启动所有实现的IJob ，并通过标注特性做为Job执行策略，同时可以自定义实现特性策略，可扩展性强，提高开发定时作业的效率
-- 目前版本：1.0.1
+Quartz.Net Job 简化启动 ，支持自定义执行策略；通过一次注入启动所有实现的IJob ，并通过标注特性做为Job执行策略，同时可以自定义实现特性策略，可扩展性强，提高开发定时作业的效率。
+Reduce-quartz-hosting  对 Quartz.net 组件 Job 的管理更加方便，很少的代码植入，即可管理启动Job
+- 目前版本：1.0.3
 
 
 ## 特性
@@ -9,7 +10,7 @@ Quartz.Net Job 简化启动 ，支持自定义执行策略；通过一次注入�
 
 ## 安装
 ```
-Install-Package Reduce.Quartz.Hosting -Version 1.0.1
+Install-Package Reduce.Quartz.Hosting -Version 1.0.3
 ```
 
 
@@ -25,6 +26,7 @@ public void ConfigureServices(IServiceCollection services)
 ### 目前提供的内置执行策略特性
   - [`CronScheduleStrategyAttribute`] 以当前默认时间的Cron表达式做为Job的执行策略
   - [`UtcTimeCronScheduleAttribute`]  以UTC 时间的Cron 表达式做为Job的执行策略
+  - [`支持自定义执行策略的实现`] 可以调用方自己实现`IScheduleStrategyAttribute` Job 执行定时执行策略的实现，比较灵活，扩展性强
 
 ### Job 实现
 
