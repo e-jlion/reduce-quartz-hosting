@@ -8,7 +8,7 @@ namespace Reduce.Quartz.Hosting
     /// <summary>
     /// 静态的Scheduled 
     /// </summary>
-    public static class RegisterScheduler
+    public static class StaticScheduler
     {
         /// <summary>
         /// 
