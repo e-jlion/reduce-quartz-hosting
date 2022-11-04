@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Reduce.Quartz.Hosting;
 using Reduce.Quartz.Hosting.Builders;
 using Reduce.Quartz.Hosting.Options;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace QuartzDemoService
 {
@@ -17,6 +18,7 @@ namespace QuartzDemoService
     {
         int _count = 0;
         TaskJobBuilder<TemplateJob> _taskJobBuilder;
+        IServiceProvider serviceProvider;
         public AddJob(TaskJobBuilder<TemplateJob> taskJobBuilder)
         {
             _taskJobBuilder = taskJobBuilder;
@@ -25,6 +27,7 @@ namespace QuartzDemoService
 
         public async Task Execute(IJobExecutionContext context)
         {
+            _taskJobBuilder = serviceProvider.GetRequiredService<TaskJobBuilder<TemplateJob>>();
             if (_count > 0)
             {
                 return;

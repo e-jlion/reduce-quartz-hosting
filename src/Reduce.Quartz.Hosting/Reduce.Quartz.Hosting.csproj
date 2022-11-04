@@ -5,7 +5,7 @@
     <Authors>Jlion</Authors>
     <Description>Quartz.Net 实现Job 简化启动实现，支持自定义执行策略，简化Job初始化的复杂逻辑，只需要一个特性标注即可自动启动全部实现的Job,提高开发效率</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.4</Version>
+    <Version>1.1.0</Version>
     <PackageProjectUrl>https://github.com/e-jlion/reduce-quartz-hosting</PackageProjectUrl>
   </PropertyGroup>
 
