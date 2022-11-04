@@ -22,6 +22,17 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
+## 全局注册 支持配置方式启动Job
+```
+services.AddHostStragegyJob(typeof(Startup).Assembly, config =>
+            {
+                config.NameValueCollection = new NameValueCollection
+                {
+                    {"quartz.threadPool.threadCount","2" }
+                };
+            });
+```
+
 ## 使用说明
 ### 目前提供的内置执行策略特性
   - [`CronScheduleStrategyAttribute`] 以当前默认时间的Cron表达式做为Job的执行策略
