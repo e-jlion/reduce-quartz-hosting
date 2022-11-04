@@ -7,6 +7,7 @@ Reduce-quartz-hosting  对 Quartz.net 组件 Job 的管理更加方便，很少�
 ## 特性
 - 【支持执行策略的自定义】 对Quartz.Net Job 的执行策略可以自定义扩展
 - 【简化Job启动注册流程】 只需要一次注册即可全部Job 启动
+- 【支持动态创建Job服务】基于相同Job执行模板动态创建任务，可以用于调度器和执行器分离方案中的动态创建调度器
 
 ## 安装
 ```
@@ -150,8 +151,30 @@ services.AddHostStragegyJob(typeof(Startup).Assembly, config =>
     }
 ```
 
+### 动态创建Job
+```
+ //启动的时候注入统一的调度器调度执行模板
+ services.AddTransient(typeof(TemplateJob));//动态创建Job 调度器的模板 这个模板里面可以实现http 、grpc、生产消息、或者执行某个简单的sql 动作，也可以分多个模板实现
+
+
+ // 可以通过api 动态创建job ，调度器和执行器分离方案比较实用
+ //使用的时候需要 通过DI拿到对应的 调度器执行模板 进行创建调度器JOb  
+ 
+ _taskJobBuilder = serviceProvider.GetRequiredService<TaskJobBuilder<TemplateJob>>();
+
+ await _taskJobBuilder.AddJob(new TaskOptions(){
+                Cron = "* * * * * ? *",
+
+                Description = "test01",
+                Group = "testgroup01",
+                Name = "test01"
+ }, context.CancellationToken);
+
+```
 
 ## 更新说明
+- 2022-11-04 v1.0.2
+  - 添加动态创建Job 方法，不需要重启服务,应用场景调度器和执行器分离，调度器管理中可以用该方法
 - 2022-07-11 v1.0.1
   - Quartz.Reduce.Hosting 更名成Reduce.Quartz.Hosting （由于nuget.org 中Quartz前缀Id 被使用，需要授权故更名）
 - 2022-07-10 v1.0.0
