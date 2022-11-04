@@ -21,9 +21,9 @@ namespace QuartzDemoService
 
         public async Task Execute(IJobExecutionContext context)
         {
-            System.Console.WriteLine($"Hello执行 {++_count},次 开始");
-            await Task.Delay(1000 * 60);
-            System.Console.WriteLine($"Hello执行 {++_count},次 完成");
+            //System.Console.WriteLine($"Hello执行 {++_count},次 开始");
+            //await Task.Delay(1000 * 60);
+            //System.Console.WriteLine($"Hello执行 {++_count},次 完成");
 
             //_logger.LogInformation($"执行中...");
             //throw new NotImplementedException();

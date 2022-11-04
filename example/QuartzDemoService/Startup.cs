@@ -13,18 +13,19 @@ namespace QuartzDemoService
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient(typeof(TemplateJob));//动态创建Job 调度器的模板
             services.AddSingleton(new Test2() { Name = "2342" });
-            //services.AddHostStragegyJob(typeof(Startup).Assembly);
+            services.AddHostStragegyJob(typeof(Startup).Assembly);
 
 
             //支持配置
-            services.AddHostStragegyJob(typeof(Startup).Assembly, config =>
-            {
-                config.NameValueCollection = new NameValueCollection
-                {
-                    {"quartz.threadPool.threadCount","2" }
-                };
-            });
+            //services.AddHostStragegyJob(typeof(Startup).Assembly, config =>
+            //{
+            //    config.NameValueCollection = new NameValueCollection
+            //    {
+            //        {"quartz.threadPool.threadCount","2" }
+            //    };
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,20 +9,23 @@ using Reduce.Quartz.Hosting;
 
 namespace QuartzDemoService
 {
+    /// <summary>
+    /// 动态统一执行Job的模板，比如实现调度器和执行器分离的逻辑，这
+    /// 里可以做为请求Http或者生产消息到消费者中的统一模板
+    /// </summary>
     [DisallowConcurrentExecution]
-    [CustomerScheduleStrategyAttribute(CronExpress = "* * * * * ? *", Description = "HelloV4")]
-    public class HelloJobV4 : IJob
+    public class TemplateJob : IJob
     {
-        static int _count = 0;
-        public HelloJobV4()
+        int _count = 0;
+        public TemplateJob()
         {
         }
 
 
         public async Task Execute(IJobExecutionContext context)
         {
-            System.Console.WriteLine($"HelloV4执行 {++_count},次 开始");
-            await Task.Delay(1000 * 60);
+            System.Console.WriteLine($"HelloV4执行 {++_count},次 开始 name:{context?.JobDetail?.Description}");
+            await Task.Delay(1000);
             System.Console.WriteLine($"HelloV4执行 {++_count},次 完成");
 
         }

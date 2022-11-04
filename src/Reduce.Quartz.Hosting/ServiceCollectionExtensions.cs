@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Reduce.Quartz.Hosting.Extensions;
 using Reduce.Quartz.Hosting;
+using Reduce.Quartz.Hosting.Builders;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -46,6 +47,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
         private static void TryAddScheduledHostedService(this IServiceCollection services)
         {
+            services.AddSingleton(typeof(TaskJobBuilder<>));
             services.TryAddSingleton<IJobFactory, QuartzJobFactory>();
             services.TryAddSingleton<ISchedulerFactory, StdSchedulerFactory>();
             services.AddHostedService<ScheduledHostedService>();
