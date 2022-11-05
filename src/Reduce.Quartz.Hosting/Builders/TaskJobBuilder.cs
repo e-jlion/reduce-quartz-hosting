@@ -76,7 +76,7 @@ namespace Reduce.Quartz.Hosting.Builders
             var job = CreateJob(taskOptions);
             var trigger = CreateTrigger(taskOptions);
 
-            await StaticScheduler.Scheduler.ScheduleJob(job, trigger, cancellationToken);
+            await SchedulerHelper.Scheduler.ScheduleJob(job, trigger, cancellationToken);
         }
     }
 }

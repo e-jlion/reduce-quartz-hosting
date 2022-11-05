@@ -44,7 +44,7 @@ namespace Reduce.Quartz.Hosting
             await Scheduler.Start(cancellationToken);
 
             //注册静态全局的Scheduler
-            StaticScheduler.New(Scheduler);
+            SchedulerHelper.New(Scheduler);
         }
 
         private async Task ScheduleJob(CancellationToken cancellationToken, ScheduledJob scheduledJob)
