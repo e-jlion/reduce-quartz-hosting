@@ -1,7 +1,7 @@
 # reduce-quartz-hosting 简介
 Quartz.Net Job 简化启动 ，支持自定义执行策略；通过一次注入启动所有实现的IJob ，并通过标注特性做为Job执行策略，同时可以自定义实现特性策略，可扩展性强，提高开发定时作业的效率。
 Reduce-quartz-hosting  对 Quartz.net 组件 Job 的管理更加方便，很少的代码植入，即可管理启动Job
-- 目前版本：1.0.3
+- 目前版本：1.1.0
 
 
 ## 特性
@@ -11,7 +11,7 @@ Reduce-quartz-hosting  对 Quartz.net 组件 Job 的管理更加方便，很少�
 
 ## 安装
 ```
-Install-Package Reduce.Quartz.Hosting -Version 1.0.3
+Install-Package Reduce.Quartz.Hosting -Version 1.1.0
 ```
 
 
@@ -173,7 +173,7 @@ services.AddHostStragegyJob(typeof(Startup).Assembly, config =>
 ```
 
 ## 更新说明
-- 2022-11-04 v1.0.2
+- 2022-11-04 v1.1.0
   - 添加动态创建Job 方法，不需要重启服务,应用场景调度器和执行器分离，调度器管理中可以用该方法
 - 2022-07-11 v1.0.1
   - Quartz.Reduce.Hosting 更名成Reduce.Quartz.Hosting （由于nuget.org 中Quartz前缀Id 被使用，需要授权故更名）
