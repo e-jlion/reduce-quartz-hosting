@@ -24,9 +24,10 @@ namespace QuartzDemoService
 
         public async Task Execute(IJobExecutionContext context)
         {
-            System.Console.WriteLine($"HelloV4执行 {++_count},次 开始 name:{context?.JobDetail?.Description}");
-            await Task.Delay(1000);
-            System.Console.WriteLine($"HelloV4执行 {++_count},次 完成");
+
+            System.Console.WriteLine($"HelloV4执行 {++_count},次 开始 name:{context?.JobDetail?.Description},time:{DateTime.Now}");
+            //await Task.Delay(1000);
+            //System.Console.WriteLine($"HelloV4执行 {++_count},次 完成");
 
         }
     }
