@@ -19,6 +19,8 @@ namespace QuartzDemoService
         int _count = 0;
         TaskJobBuilder<TemplateJob> _taskJobBuilder;
         IServiceProvider _serviceProvider;
+        
+
         public AddJob(TaskJobBuilder<TemplateJob> taskJobBuilder,IServiceProvider serviceProvider)
         {
             _taskJobBuilder = taskJobBuilder;
@@ -30,12 +32,20 @@ namespace QuartzDemoService
         {
             try
             {
+
                 _taskJobBuilder = _serviceProvider.GetRequiredService<TaskJobBuilder<TemplateJob>>();
+                if (_count == 50)
+                { 
+                    await _taskJobBuilder.DeleteJob("test01","testgroup01");
+                }
+
                 if (_count > 0)
                 {
-                    return;
+                    _count++;
 
+                    return;
                 }
+                _count++;
 
                 //动态注入创建Job ,这里可以通过界面管理方式，通过api方式进行动态创建Job ，并持久化数据库中
                 await _taskJobBuilder.AddJob(new TaskOptions()
@@ -55,6 +65,7 @@ namespace QuartzDemoService
                     Name = "test02"
                 }, context.CancellationToken);
                 _count = 2;
+
             }
             catch (Exception ex)
             { 

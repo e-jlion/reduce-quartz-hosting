@@ -8,6 +8,8 @@ using System.Transactions;
 using System.Xml.Linq;
 using Reduce.Quartz.Hosting.Options;
 using static Quartz.Logging.OperationName;
+using Quartz.Impl;
+using System.Collections.Specialized;
 
 namespace Reduce.Quartz.Hosting.Builders
 {
@@ -17,6 +19,14 @@ namespace Reduce.Quartz.Hosting.Builders
     /// <typeparam name="T"></typeparam>
     public class TaskJobBuilder<T> where T : IJob
     {
+
+        ISchedulerFactory _schedulerFactory;
+
+        public TaskJobBuilder(ISchedulerFactory schedulerFactory)
+        {
+            _schedulerFactory = schedulerFactory;
+        }
+
         /// <summary>
         /// 创建执行Job
         /// </summary>
@@ -77,6 +87,24 @@ namespace Reduce.Quartz.Hosting.Builders
             var trigger = CreateTrigger(taskOptions);
 
             await RegisterScheduler.Scheduler.ScheduleJob(job, trigger, cancellationToken);
+        }
+
+        /// <summary>
+        /// 删除Job
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="jobName"></param>
+        /// <param name="groupName"></param>
+        /// <returns></returns>
+        public async Task DeleteJob(string jobName, string groupName)
+        {
+            var scheduler = RegisterScheduler.Scheduler;
+            var jobKey = new JobKey(jobName, groupName);
+            if (await scheduler.CheckExists(jobKey))
+            {
+                await scheduler.DeleteJob(jobKey);
+                //Console.WriteLine($"已删除任务: {jobName}");
+            }
         }
     }
 }
